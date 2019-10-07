@@ -1,7 +1,7 @@
 {
     "name": "tabuna/failback",
     "type": "library",
-    "description": "",
+    "description": "Small wrapper for creating a branch of inaccessibility",
     "keywords": [
         "tabuna",
         "failback"

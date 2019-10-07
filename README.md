@@ -5,7 +5,7 @@
 [![Build Status][ico-travis]][link-travis]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-This is a small wrapper for creating a branch of inaccessibility.
+This is a small wrapper for creating a branch of inaccessibility. 
 
 ## Install
 
