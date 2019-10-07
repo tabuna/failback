@@ -1,0 +1,49 @@
+{
+    "name": "tabuna/failback",
+    "type": "library",
+    "description": "",
+    "keywords": [
+        "tabuna",
+        "failback"
+    ],
+    "homepage": "https://github.com/tabuna/fallback",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexandr Chernyaev",
+            "email": "bliz48ru@gmail.com",
+            "homepage": "https://tabuna.github.io",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php" : "~7.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit" : ">=7.0",
+        "squizlabs/php_codesniffer": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tabuna\\FailBack\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tabuna\\FailBack\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "check-style": "phpcs src tests",
+        "fix-style": "phpcbf src tests"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
