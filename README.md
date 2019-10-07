@@ -1,9 +1,11 @@
 # Actions for Fail Back
 
-[![Latest Version on Packagist][ico-version]][link-packagist]
-[![Software License][ico-license]](LICENSE.md)
-[![Build Status][ico-travis]][link-travis]
-[![Total Downloads][ico-downloads]][link-downloads]
+
+
+<a href="https://travis-ci.org/orchidsoftware/platform/"><img src="https://travis-ci.org/tabuna/failback.svg?branch=master"></a>
+<a href="https://packagist.org/packages/tabuna/failback"><img alt="Packagist" src="https://img.shields.io/packagist/dt/tabuna/failback.svg"></a>
+<a href="https://packagist.org/packages/tabuna/failback"><img alt="Packagist Version" src="https://img.shields.io/packagist/v/tabuna/failback.svg"></a>
+
 
 This is a small wrapper for creating a branch of inaccessibility. 
 
