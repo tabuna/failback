@@ -2,7 +2,7 @@
 
 
 
-<a href="https://travis-ci.org/tabuna/failback/"><img src="https://travis-ci.org/tabuna/failback.svg?branch=master"></a>
+<a href="https://travis-ci.org/tabuna/failback/"><img src="https://travis-ci.org/tabuna/Fallback.svg?branch=master"></a>
 <a href="https://packagist.org/packages/tabuna/failback"><img alt="Packagist" src="https://img.shields.io/packagist/dt/tabuna/failback.svg"></a>
 <a href="https://packagist.org/packages/tabuna/failback"><img alt="Packagist Version" src="https://img.shields.io/packagist/v/tabuna/failback.svg"></a>
 
