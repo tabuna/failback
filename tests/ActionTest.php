@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 class ActionTest extends TestCase
 {
 
-    public function testDefaultValue()
+    public function testDefaultValue(): void
     {
         $result = Action::make(function () {
             throw new Exception();
@@ -20,7 +20,7 @@ class ActionTest extends TestCase
         $this->assertTrue($result);
     }
 
-    public function testHelper()
+    public function testHelper(): void
     {
         $result = failBack(function () {
             throw new Exception();
@@ -29,7 +29,7 @@ class ActionTest extends TestCase
         $this->assertNull($result);
     }
 
-    public function testInvoke()
+    public function testInvoke(): void
     {
         $result = failBack(function () {
             throw new Exception();
@@ -38,7 +38,7 @@ class ActionTest extends TestCase
         $this->assertNull($result);
     }
 
-    public function testToString()
+    public function testToString(): void
     {
         $result = (string)failBack(function () {
             throw new Exception();
@@ -49,7 +49,7 @@ class ActionTest extends TestCase
         $this->assertEquals('Alexandr', $result);
     }
 
-    public function testFailBack()
+    public function testFailBack(): void
     {
         $result = Action::make(function () {
             throw new Exception();
@@ -63,7 +63,7 @@ class ActionTest extends TestCase
         $this->assertTrue($result);
     }
 
-    public function testContextFailBack()
+    public function testContextFailBack(): void
     {
         $name = 'Tomas';
 
@@ -81,7 +81,15 @@ class ActionTest extends TestCase
         $this->assertEquals('Alexandr', $name);
     }
 
-    public function testLateCreation()
+    /**
+     * @return bool
+     */
+    private function returnAlwaysTrue(): bool
+    {
+        return true;
+    }
+
+    public function testLateCreation(): void
     {
         $action = new Action();
 
@@ -94,7 +102,7 @@ class ActionTest extends TestCase
         $this->assertFalse($result);
     }
 
-    public function testRunExeptions()
+    public function testRunExeptions(): void
     {
         $action = new Action();
 
@@ -111,7 +119,7 @@ class ActionTest extends TestCase
         $this->assertTrue($result);
     }
 
-    public function testFallExeptions()
+    public function testFallExeptions(): void
     {
         $action = new Action();
 
@@ -132,8 +140,7 @@ class ActionTest extends TestCase
         $this->assertTrue($result);
     }
 
-
-    public function testDownAction()
+    public function testDownAction(): void
     {
         $result = Action::make(function () {
             throw new Exception();
@@ -149,7 +156,7 @@ class ActionTest extends TestCase
         $this->assertEquals($result, 'default');
     }
 
-    public function testInvokeAction()
+    public function testInvokeAction(): void
     {
         $class = new class() {
 
@@ -168,13 +175,5 @@ class ActionTest extends TestCase
             ->run();
 
         $this->assertTrue($result);
-    }
-
-    /**
-     * @return bool
-     */
-    private function returnAlwaysTrue(): bool
-    {
-        return true;
     }
 }

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Tabuna\FailBack;
 
+use Throwable;
+
 /**
  * Class Action
  */
@@ -28,12 +30,23 @@ class Action
      * Create a new Action Instance
      *
      * @param callable $closure
-     * @param null          $default
+     * @param null     $default
      */
     public function __construct(callable $closure = null, $default = null)
     {
         $this->closure = $closure;
         $this->default = $default;
+    }
+
+    /**
+     * @param callable $closure
+     * @param null     $default
+     *
+     * @return Action
+     */
+    public static function make(callable $closure, $default = null): Action
+    {
+        return new static($closure, $default);
     }
 
     /**
@@ -52,17 +65,6 @@ class Action
 
     /**
      * @param callable $closure
-     * @param null     $default
-     *
-     * @return Action
-     */
-    public static function make(callable $closure, $default = null): Action
-    {
-        return new static($closure, $default);
-    }
-
-    /**
-     * @param callable $closure
      *
      * @return Action
      */
@@ -71,34 +73,6 @@ class Action
         $this->backs[] = $closure;
 
         return $this;
-    }
-
-    /**
-     * @return mixed|null
-     */
-    private function handler()
-    {
-        foreach ($this->backs as $back) {
-            try {
-                $this->default = $back();
-            } catch (\Throwable $throwable) {
-                continue;
-            }
-        }
-
-        return $this->default;
-    }
-
-    /**
-     * @return mixed|void
-     */
-    public function run()
-    {
-        try {
-            return call_user_func($this->closure);
-        } catch (\Throwable $throwable) {
-            return $this->handler();
-        }
     }
 
     /**
@@ -112,8 +86,36 @@ class Action
     /**
      * @return mixed|void
      */
+    public function run()
+    {
+        try {
+            return call_user_func($this->closure);
+        } catch (Throwable $throwable) {
+            return $this->handler();
+        }
+    }
+
+    /**
+     * @return mixed|null
+     */
+    private function handler()
+    {
+        foreach ($this->backs as $back) {
+            try {
+                $this->default = $back();
+            } catch (Throwable $throwable) {
+                continue;
+            }
+        }
+
+        return $this->default;
+    }
+
+    /**
+     * @return mixed|void
+     */
     public function __toString(): string
     {
-        return (string) $this->run();
+        return (string)$this->run();
     }
 }

@@ -37,8 +37,6 @@ $result = failBack(function (){
 
 Fallback Features:
 ```php
-use Tabuna\FailBack\Action;
-
 // $result = true;
 $result = failBack(function () {
     throw new \Exception();
@@ -52,8 +50,6 @@ $result = failBack(function () {
 
 As classes:
 ```php
-use Tabuna\FailBack\Action;
-
 $class = new class() {
 
     /**
