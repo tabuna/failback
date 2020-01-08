@@ -28,6 +28,11 @@ use Tabuna\FailBack\Action;
 $result = Action::make(function () {
     throw new \Exception();
 }, 'default')->run();
+
+// or short helper
+$result = failBack(function (){
+    throw new \Exception();
+}, 'default')();
 ```
 
 Fallback Features:
@@ -35,13 +40,13 @@ Fallback Features:
 use Tabuna\FailBack\Action;
 
 // $result = true;
-$result = Action::make(function () {
+$result = failBack(function () {
     throw new \Exception();
-})->fallBack(function () {
+})->fail(function () {
     throw new \Error();
-})->fallBack(function () {
+})->fail(function () {
     return true;
-})->run();
+})();
 ```
 
 
@@ -61,9 +66,9 @@ $class = new class() {
 };
 
 // $result = true;
-$result = Action::make(function () {
+$result = failBack(function () {
     throw new Exception();
-})->fallBack($class)->run();
+})->fail($class)->run();
 ```
 
 ## Testing

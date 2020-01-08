@@ -20,14 +20,42 @@ class ActionTest extends TestCase
         $this->assertTrue($result);
     }
 
+    public function testHelper()
+    {
+        $result = failBack(function () {
+            throw new Exception();
+        })->run();
+
+        $this->assertNull($result);
+    }
+
+    public function testInvoke()
+    {
+        $result = failBack(function () {
+            throw new Exception();
+        })();
+
+        $this->assertNull($result);
+    }
+
+    public function testToString()
+    {
+        $result = (string)failBack(function () {
+            throw new Exception();
+        })->fail(function () {
+            return 'Alexandr';
+        });
+
+        $this->assertEquals('Alexandr', $result);
+    }
 
     public function testFailBack()
     {
         $result = Action::make(function () {
             throw new Exception();
-        })->fallBack(function () {
+        })->fail(function () {
             throw new Exception();
-        })->fallBack(function () {
+        })->fail(function () {
             return true;
         })
             ->run();
@@ -41,7 +69,7 @@ class ActionTest extends TestCase
 
         $result = Action::make(function () {
             throw new Exception();
-        })->fallBack(function () use (&$name) {
+        })->fail(function () use (&$name) {
 
             $name = 'Alexandr';
 
@@ -66,7 +94,6 @@ class ActionTest extends TestCase
         $this->assertFalse($result);
     }
 
-
     public function testRunExeptions()
     {
         $action = new Action();
@@ -88,7 +115,7 @@ class ActionTest extends TestCase
     {
         $action = new Action();
 
-        $action->fallBack(function () {
+        $action->fail(function () {
             try {
                 throw new Exception();
             } catch (Exception $exception) {
@@ -111,10 +138,10 @@ class ActionTest extends TestCase
         $result = Action::make(function () {
             throw new Exception();
         }, 'default')
-            ->fallBack(function () {
+            ->fail(function () {
                 throw new Exception();
             })
-            ->fallBack(function () {
+            ->fail(function () {
                 throw new Error();
             })
             ->run();
@@ -137,11 +164,10 @@ class ActionTest extends TestCase
 
         $result = Action::make(function () {
             throw new Exception();
-        })->fallBack($class)
+        })->fail($class)
             ->run();
 
         $this->assertTrue($result);
-
     }
 
     /**

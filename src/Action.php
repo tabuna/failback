@@ -66,7 +66,7 @@ class Action
      *
      * @return Action
      */
-    public function fallBack(callable $closure): Action
+    public function fail(callable $closure): Action
     {
         $this->backs[] = $closure;
 
@@ -76,7 +76,7 @@ class Action
     /**
      * @return mixed|null
      */
-    private function runFailBack()
+    private function handler()
     {
         foreach ($this->backs as $back) {
             try {
@@ -97,7 +97,23 @@ class Action
         try {
             return call_user_func($this->closure);
         } catch (\Throwable $throwable) {
-            return $this->runFailBack();
+            return $this->handler();
         }
+    }
+
+    /**
+     * @return mixed|void
+     */
+    public function __invoke()
+    {
+        return $this->run();
+    }
+
+    /**
+     * @return mixed|void
+     */
+    public function __toString(): string
+    {
+        return (string) $this->run();
     }
 }
