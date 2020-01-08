@@ -10,7 +10,6 @@ use PHPUnit\Framework\TestCase;
 
 class ActionTest extends TestCase
 {
-
     public function testDefaultValue(): void
     {
         $result = Action::make(function () {
@@ -70,7 +69,6 @@ class ActionTest extends TestCase
         $result = Action::make(function () {
             throw new Exception();
         })->fail(function () use (&$name) {
-
             $name = 'Alexandr';
 
             return $this->returnAlwaysTrue();
