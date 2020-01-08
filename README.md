@@ -50,7 +50,7 @@ $result = failBack(function () {
 
 As classes:
 ```php
-$class = new class() {
+$class = new class {
 
     /**
      * @return bool
